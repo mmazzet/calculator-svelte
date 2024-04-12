@@ -1,6 +1,12 @@
 <script lang="ts">
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."];
   const operations = ["/", "X", "+", "-", "="];
+
+  let selectedOperation = "";
+
+  const handleOperationClick = (operation: string) => {
+    selectedOperation = operation;
+  };
 </script>
 
 <main>
@@ -16,7 +22,7 @@
       </div>
       <div class="operations">
         {#each operations as operation (operation)}
-          <button class="btn btn-orange"> {operation} </button>
+          <button class={`btn ${operation === selectedOperation ? 'btn-silver' : 'btn-orange' }`} on:click={() => handleOperationClick(operation)}> {operation} </button>
         {/each}
       </div>
     </div>
