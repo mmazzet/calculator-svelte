@@ -4,6 +4,8 @@
 
   let selectedOperation = "";
   let display = "";
+  let firstNumber = "";
+  let secondNumber = "0";
 
   const handleOperationClick = (operation: string) => {
     selectedOperation = operation;
@@ -12,10 +14,25 @@
   const handleNumberClick = (number: string) => {
     if (display === "" && number === "0") return;
     if(number === "." && display.includes('.')) return;
-    if (display === "" && number === ".") {
-      return display = "0.";
+
+    if(!selectedOperation) {
+      if (display === "" && number === ".") {
+        firstNumber = "0";
+        return display = firstNumber;
+      }
+      firstNumber = `${firstNumber}${number}`
+      return display = firstNumber;
+    } else {
+      if (display === "" && number === ".") {
+        secondNumber = "0";
+        return display = secondNumber;
+      }
+      secondNumber = `${secondNumber}${number}`
+      return display = secondNumber;
     }
-    display = `${display}${number}`;
+
+
+    // display = `${display}${number}`;
 
   };
 </script>
