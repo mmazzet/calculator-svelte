@@ -3,21 +3,33 @@
   const operations = ["/", "X", "+", "-", "="];
 
   let selectedOperation = "";
+  let display = "";
 
   const handleOperationClick = (operation: string) => {
     selectedOperation = operation;
+  };
+
+  const handleNumberClick = (number: string) => {
+    if (display === "" && number === "0") return;
+    if(number === "." && display.includes('.')) return;
+    if (display === "" && number === ".") {
+      return display = "0.";
+    }
+    display = `${display}${number}`;
+
   };
 </script>
 
 <main>
   <div class="calculator">
     <div class="results">
+      {display}
     </div>
     <div class="digits">
       <div class="numbers">
         <button class="btn btn-xlg"> C </button>
         {#each numbers as number (number)}
-          <button class={`btn ${number === '0' ? 'btn-lg' : null}`}> {number} </button>
+          <button class={`btn ${number === '0' ? 'btn-lg' : null}`} on:click={() => handleNumberClick(number)}> {number} </button>
         {/each}
       </div>
       <div class="operations">
